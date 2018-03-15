@@ -1,0 +1,43 @@
+// apply the java plugin to add support for Java
+apply plugin: 'java'
+
+// in this section declare where to find the dependencies of your project
+repositories {
+    jcenter()
+}
+
+// in this section declare the dependencies for your production and test code
+dependencies {
+    compile "org.seleniumhq.selenium:selenium-support:2.53.1"
+    compile "org.seleniumhq.selenium:selenium-firefox-driver:2.53.1"
+    compile "org.seleniumhq.selenium:selenium-chrome-driver:2.53.1"
+    compile "org.seleniumhq.selenium:selenium-remote-driver:2.53.1"
+    compile "org.seleniumhq.selenium:selenium-server:2.53.1"
+    compile "info.cukes:cucumber-java:1.2.4"
+    compile "info.cukes:cucumber-core:1.2.4"
+    compile "info.cukes:cucumber-junit:1.2.4"
+    compile 'info.cukes:gherkin:2.12.2'
+    testCompile 'junit:junit:4.12'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.0.1'
+}
+
+task startSeleniumHub() << {
+    ant.java(classname : 'org.openqa.grid.selenium.GridLauncher', 
+            fork:true,
+            classpath : configurations.runtime.asPath
+        ) {
+        arg(value : '-role')
+        arg(value : 'hub')
+    }
+}
+
+task startSeleniumNode() << {
+    ant.java(classname : 'org.openqa.grid.selenium.GridLauncher', 
+            fork:true,
+            classpath : configurations.runtime.asPath) {
+        arg(value : '-role')
+        arg(value : 'node')
+        arg(value : '-hub')
+        arg(value : 'http://localhost:4444/grid/register')
+    }
+}
