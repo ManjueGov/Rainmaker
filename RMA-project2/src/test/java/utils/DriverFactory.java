@@ -13,11 +13,10 @@ import java.net.URL;
 public class DriverFactory
 {
     public static RemoteWebDriver driver;
-    public static DesiredCapabilities capabilities;
+    private static DesiredCapabilities capabilities;
     private String json;
     private String browserName;
-    private String platform;
-    private String version;
+
 
     @Before
     public void setUp() throws IOException {
