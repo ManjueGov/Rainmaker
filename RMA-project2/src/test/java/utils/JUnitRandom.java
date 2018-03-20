@@ -50,56 +50,11 @@ public class JUnitRandom {
                 driver = new RemoteWebDriver(new URL("http://172.16.2.178:4444/wd/hub"), DesiredCapabilities.internetExplorer());
             return driver;
     }
-    @Test
-    public void testSimple() throws Exception {
-        int browserCount = myArray.size();
-        int counter=0;
-        testCase1(myArray.get(counter++).getAsJsonObject().get("browserName").getAsString());
-        counter = resetCounter(counter, browserCount);
-        testCase2(myArray.get(counter++).getAsJsonObject().get("browserName").getAsString());
-    }
 
-    private int resetCounter(int counter, int broserCounter){
+    private int resetCounter(int counter, int browserCounter){
         int returnCounter=0;
-        if(counter==broserCounter) returnCounter=0;
+        if(counter==browserCounter) returnCounter=0;
         else returnCounter = counter;
         return returnCounter;
-    }
-    private void testCase1(String browserName) throws Exception{
-        WebDriver driver=initializeDriver(browserName);
-        driver.get("https://cucumber.io/");
-        driver.manage().window().maximize();
-        driver.manage().deleteAllCookies();
-        String title = driver.getTitle();
-        System.out.println("Page title is: " + title);
-        WebElement element = driver.findElement(By.linkText("Docs"));
-        element.click();
-        driver = new Augmenter().augment(driver);
-        File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        try {
-            FileUtils.copyFile(srcFile, new File("Screenshot.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        driver.quit();
-    }
-
-    private void testCase2(String browserName) throws Exception{
-        WebDriver driver=initializeDriver(browserName);
-        driver.get("https://www.seleniumhq.org/");
-        driver.manage().window().maximize();
-        driver.manage().deleteAllCookies();
-        String title = driver.getTitle();
-        System.out.println("Page title is: " + title);
-        WebElement element = driver.findElement(By.cssSelector("img[alt='Selenium Grid Logo']"));
-        element.click();
-        driver = new Augmenter().augment(driver);
-        File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        try {
-            FileUtils.copyFile(srcFile, new File("Screenshot.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        driver.quit();
     }
 }

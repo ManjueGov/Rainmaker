@@ -1,7 +1,24 @@
+group 'rainMakers.v.0.1'
+version '0.1'
+
 // apply the java plugin to add support for Java
+apply plugin: 'groovy'
 apply plugin: 'java'
 
 // in this section declare where to find the dependencies of your project
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "gradle.plugin.com.tv.gradle:CukeIT-Parallel-Generator:1.0-SNAPSHOT"
+    }
+}
+
+apply plugin: "com.tv.gradle.cukeGenerator"
+
 repositories {
     jcenter()
 }
@@ -19,6 +36,8 @@ dependencies {
     compile 'info.cukes:gherkin:2.12.2'
     testCompile 'junit:junit:4.12'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.0.1'
+    //ticompile group: 'com.github.temyers', name: 'cucumber-jvm-parallel-plugin', version: '0.1.0'
+    //compile "org.apache.maven.plugins:maven-failsafe-plugin:2.21.0"
 }
 
 task startSeleniumHub() << {
@@ -40,4 +59,10 @@ task startSeleniumNode() << {
         arg(value : '-hub')
         arg(value : 'http://localhost:4444/grid/register')
     }
+}
+
+task cukeGenerator(type: GenerateTask) {
+    cukeParallelPlugin.tags = "smoke"
+    cukeParallelPlugin.outputDirectory = "${project.projectDir}/src/test/java/generated-test-sources/cucumber"
+    cukeParallelPlugin.cucumberOutputDir = "${project.projectDir}/target/cucumber-parallel"
 }

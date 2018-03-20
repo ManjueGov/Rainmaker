@@ -1,0 +1,61 @@
+{
+  "config": [
+    {
+      "parallel": [
+        {
+          "browserName": "chrome",
+          "platform": "WINDOWS",
+          "version": "62"
+        },
+        {
+          "browserName": "chrome",
+          "platform": "ANY",
+          "version": "63"
+        },
+        {
+          "browserName": "chrome",
+          "platform": "VISTA",
+          "version": "64"
+        }
+      ]
+    },
+    {
+      "sequence": [
+        {
+          "browserName": "chrome",
+          "platform": "WINDOWS",
+          "version": "62"
+        },
+        {
+          "browserName": "chrome",
+          "platform": "ANY",
+          "version": "63"
+        },
+        {
+          "browserName": "chrome",
+          "platform": "VISTA",
+          "version": "64"
+        }
+      ]
+    },
+    {
+      "random": [
+        {
+          "browserName": "chrome",
+          "platform": "WINDOWS",
+          "version": "62"
+        },
+        {
+          "browserName": "chrome",
+          "platform": "ANY",
+          "version": "63"
+        },
+        {
+          "browserName": "chrome",
+          "platform": "VISTA",
+          "version": "64"
+        }
+      ]
+    }
+  ]
+}

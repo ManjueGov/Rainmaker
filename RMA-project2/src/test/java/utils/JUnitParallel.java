@@ -51,10 +51,7 @@ public class JUnitParallel {
     @Before
     public void setUp() throws Exception {
         DesiredCapabilities capability = new DesiredCapabilities();
-//        ChromeDriver chromeDriver = new ChromeDriver();
-//        capability.setCapability("platform", platform);
         capability.setCapability("browser", browserName);
-//        capability.setCapability("browserVersion", browserVersion);
 //        capability.setCapability("name", "Parallel test");
         driver = new RemoteWebDriver(new URL("http://172.16.2.178:4444/wd/hub"), DesiredCapabilities.chrome());
     }
