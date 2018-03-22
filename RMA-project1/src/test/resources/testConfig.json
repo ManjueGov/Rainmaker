@@ -1,0 +1,14 @@
+{
+  "capabilities":[
+    {
+      "browserName": "chrome",
+      "platform": "VISTA",
+      "version": "65"
+    },
+    {
+      "browserName": "firefox",
+      "platform": "ANY",
+      "version": "58"
+    }
+  ]
+}
